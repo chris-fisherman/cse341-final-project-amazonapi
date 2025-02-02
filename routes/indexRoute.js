@@ -1,21 +1,18 @@
 /*****************************/
 /*** REQUIRE STATEMENTS ***/
 /*****************************/
-/* files */
-const indexRoute = require('./routes/indexRoute');
-/* app */
-const port = process.env.PORT || 3000;
+/* router */
 const express = require('express');
-const app = express();
+const router = express();
 
 /*****************************/
 /*** ROUTES ***/
 /*****************************/
-app.use('/', indexRoute);
+router.get('/', (req, res) => {
+  res.send('Amazon API index route');
+});
 
 /*****************************/
-/*** LISTEN PORT ***/
+/*** EXPORTS ***/
 /*****************************/
-app.listen(port, () => {
-  console.log(`Running on port ${port}`);
-});
+module.exports = router;
