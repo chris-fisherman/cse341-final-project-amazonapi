@@ -3,6 +3,7 @@
 /*****************************/
 /* files */
 const indexRoute = require('./routes/indexRoute');
+const mongodb = require('./data/database');
 /* app */
 const port = process.env.PORT || 3000;
 const express = require('express');
@@ -16,6 +17,12 @@ app.use('/', indexRoute);
 /*****************************/
 /*** LISTEN PORT ***/
 /*****************************/
-app.listen(port, () => {
-  console.log(`Running on port ${port}`);
+mongodb.initDb((error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    app.listen(port, () => {
+      console.log(`Database is listening and node running on port ${port}`);
+    });
+  }
 });
