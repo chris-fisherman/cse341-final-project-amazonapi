@@ -13,7 +13,7 @@ npm install
 **2.** Once the dependencies are installed, run the development command `npm start`
 
 ```
-npm run dev
+npm start
 ```
 
 ## Functions of each folder
