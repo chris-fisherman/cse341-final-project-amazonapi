@@ -10,21 +10,11 @@ This is an API to replicate the basic functionality of Amazon. This will include
 npm install
 ```
 
-**3.** Once the dependencies are installed, run the development command `npm run dev`
+**2.** Once the dependencies are installed, run the development command `npm run dev`
 
 ```
 npm run dev
 ```
-
-## 🗂️Purpose of each folder
-
-- controllers/ - Functions and logic of each endpoint
-- data/ - Connection to MongoDB
-- helpers/ - Validation helper
-- middlewares/ - Authentication and validation rules
-- routes/ - API routes
-- swagger/ - API documentation
-- tests/ - HTTP requests tests
 
 ## 📜Rules for development
 
