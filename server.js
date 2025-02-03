@@ -3,9 +3,9 @@
 /*****************************/
 /* files */
 const indexRoute = require('./routes/indexRoute');
-const mongodb = require('./data/database');
+const { initDB } = require('./data/database');
 /* app */
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const express = require('express');
 const app = express();
 
@@ -17,12 +17,12 @@ app.use('/', indexRoute);
 /*****************************/
 /*** LISTEN PORT ***/
 /*****************************/
-mongodb.initDb((error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    app.listen(port, () => {
-      console.log(`Database is listening and node running on port ${port}`);
-    });
+(async () => {
+  try {
+    await initDB();
+
+    app.listen(port, () => {return console.log(`-==::APP is running on ${port} port::==-`)});
+  } catch (error) {
+    console.error('Failed to initialize DB:', error);
   }
-});
+})();
