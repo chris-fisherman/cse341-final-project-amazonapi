@@ -1,41 +1,34 @@
-/****************************/
-/*** REQUIRE STATEMENTS ***/
-/****************************/
-const dotenv = require('dotenv');
-dotenv.config();
-const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-let database;
-
-/****************************/
-/*** INIT DATABASE ***/
-/****************************/
-const initDb = (callback) => {
-  if (database) {
-    console.log('Database is already initialized!');
-    return callback(null, database);
+const initDB = async () => {
+  if (mongoose.connection.readyState) {
+    console.warn('DB is already initialized!');
+    return mongoose.connection;
   }
-  MongoClient.connect(process.env.MONGODB_URL)
-    .then((client) => {
-      database = client;
-      callback(null, database);
-    })
-    .catch((err) => {
-      callback(err);
+
+  try {
+    await mongoose.connect(process.env.DB_STRING, {
+      dbName: process.env.DB_NAME
     });
-};
 
-/****************************/
-/*** GET DATABASE ***/
-/****************************/
-const getDatabase = () => {
-  if (!database) {
-    throw Error('Database not initialized!');
+    console.log(`<[${mongoose.connection.name}]> DB initialized successfully.`);
+    return mongoose.connection;
+  } catch (error) {
+    console.error('Failed to initialize DB:', error);
+    throw error;
   }
-  return database;
-};
+}
 
-/****************************/
-/*** EXPORTS ***/
-/****************************/
-module.exports = { initDb, getDatabase };
+const getDB = () => {
+  if (!mongoose.connection.readyState) {
+    throw new Error('DB is not initialized!');
+  }
+
+  return mongoose.connection;
+}
+
+module.exports = {
+  initDB,
+  getDB
+}
