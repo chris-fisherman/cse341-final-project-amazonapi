@@ -10,7 +10,13 @@ This is an API to replicate the basic functionality of Amazon. This will include
 npm install
 ```
 
-**2.** Once the dependencies are installed, run the development command `npm start`
+**2.** Create the .env file in the root of the project and add the `MONGODB_URL` variable with the MongoDB database connection string
+
+```
+MONGODB_URL = <connection_string>
+```
+
+**3.** Once the dependencies are installed and the .env file is created, run the development command `npm start`
 
 ```
 npm start
