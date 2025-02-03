@@ -16,6 +16,9 @@ npm install
 npm run dev
 ```
 
+> [!NOTE]
+> The .env file needs the variables `DB_STRING` and `DB_NAME`
+
 ## 📜Rules for development
 
 - Always keep the main branch clean of errors and console.log
