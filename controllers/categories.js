@@ -18,7 +18,7 @@ const getAllCategories = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-};
+}
 
 const getCategoryById = async (req, res) => {
   const id = req.params.id;
@@ -41,7 +41,7 @@ const getCategoryById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-};
+}
 
 const createCategory = async (req, res) => {
   const newCategory = new Category(req.body);
@@ -53,10 +53,49 @@ const createCategory = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message, stack: error.stack });
   }
-};
+}
+
+const updateCategory = async (req, res) => {
+  const getUpdates = req.body;
+
+  if (!getUpdates) {
+    return res.status(400).json({ message: 'No category data provided.' });
+  }
+
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid Category ID format.' });
+  }
+
+  try {
+    const update = await db
+      .getDB()
+      .collection('categories')
+      .findOneAndUpdate(
+        { _id: ObjectId.createFromHexString(id) },
+        { $set: getUpdates },
+        {
+          new: true,
+          upsert: false,
+        }
+      );
+
+    if (!update) {
+      return res.status(404).json({ error: 'Category do not has been updated.' });
+    }
+
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(200).json({ message: 'Category updated successfully.' });
+  }
+  catch (error) {
+    return res.status(500).json({ message: error.message, stack: error.stack });
+  }
+}
 
 module.exports = {
   getAllCategories,
   getCategoryById,
-  createCategory
+  createCategory,
+  updateCategory
 };
