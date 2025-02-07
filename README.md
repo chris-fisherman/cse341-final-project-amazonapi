@@ -19,6 +19,14 @@ npm run dev
 > [!NOTE]
 > The .env file needs the variables `DB_STRING` and `DB_NAME`
 
+## 🟢Running swagger.js
+
+**1.** To create a new swagger.json, run the code `npm run swagger`
+
+```
+npm run swagger
+```
+
 ## 📜Rules for development
 
 - Always keep the main branch clean of errors and console.log
@@ -36,11 +44,11 @@ npm run dev
 
 - [x] Create GitHub repo and init node project (**Christian Peraza**)
 - [x] Connect to MongoDB and deploy on Render (**Christian Peraza**)
-- [ ] **Users** collection with all CRUD operations (**Ignacio Marenco**)
-- [ ] Error handling to **Users** collection (**Ignacio Marenco**)
-- [ ] **Categories** collection with all CRUD operations (**Nestor Otondo**)
-- [ ] Error handling to **Categories** collection (**Nestor Otondo**)
-- [ ] API Swagger documentation to **Users** and **Categories** collections (**Christian Peraza**)
+- [x] **Users** collection with all CRUD operations (**Ignacio Marenco**)
+- [x] Error handling to **Users** collection (**Ignacio Marenco**)
+- [x] **Categories** collection with all CRUD operations (**Nestor Otondo**)
+- [x] Error handling to **Categories** collection (**Nestor Otondo**)
+- [x] API Swagger documentation to **Users** and **Categories** collections (**Christian Peraza**)
 
 ### Week 06 (Feb/10 - Feb/15)
 
