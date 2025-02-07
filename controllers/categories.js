@@ -93,9 +93,31 @@ const updateCategory = async (req, res) => {
   }
 }
 
+const deleteCategory = async (req, res) => {
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid category ID format" });
+    }
+
+  try {
+    const deleted = await db.getDB().collection('categories').findOneAndDelete({_id : ObjectId.createFromHexString(id)});
+
+    if (deleted) {
+      res.setHeader('Content-Type', 'application/json');
+      return res.status(200).json({ message: 'Category deleted successfully.' });
+    }
+
+    return res.status(404).json({ error: 'Category not found.' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, stack: error.stack });
+  }
+}
+
 module.exports = {
   getAllCategories,
   getCategoryById,
   createCategory,
-  updateCategory
+  updateCategory,
+  deleteCategory
 };
