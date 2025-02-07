@@ -2,17 +2,15 @@
 /*** REQUIRE STATEMENTS ***/
 /*****************************/
 /* router */
-const express = require('express');
-const router = express();
+const routes = require('express').Router();
+const categories = require('./categories');
 
 /*****************************/
 /*** ROUTES ***/
 /*****************************/
-router.get('/', (req, res) => {
-  res.send('Amazon API index route');
-});
+routes.use('/category', categories);
 
 /*****************************/
 /*** EXPORTS ***/
 /*****************************/
-module.exports = router;
+module.exports = routes;
