@@ -24,13 +24,13 @@ function decrypt(text) {
   return Buffer.concat([decrypted, decipher.final()]).toString();
 }
 
-exports.sign = (payload) => {
+exports.sign = (payload) =>
+  // eslint-disable-next-line arrow-body-style
   jws.sign({
     header: { alg: 'HS256' },
     payload: encrypt(JSON.stringify(payload)),
     secret: config.secret
   });
-};
 
 exports.login = (req, res, next) => {
   try {
