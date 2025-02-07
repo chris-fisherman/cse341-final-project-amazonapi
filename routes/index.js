@@ -9,8 +9,8 @@ const users = require('./users');
 /*****************************/
 /*** ROUTES ***/
 /*****************************/
-routes.use("/", require("./swagger"));
-routes.use('/category', categories);
+routes.use('/', require('./swagger'));
+routes.use('/categories', categories);
 routes.use('/users', users);
 
 /*****************************/
