@@ -5,7 +5,7 @@ const User = require('../models/user')(mongoose);
 const { ObjectId } = mongoose.Types;
 
 const getAll = async (req, res) => {
-  //#swagger.tags = ['User']
+  //#swagger.tags = ['Users']
   try {
     const users = await db.getDB().collection('users').find({}).toArray();
 
@@ -20,7 +20,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-  //#swagger.tags = ['User']
+  //#swagger.tags = ['Users']
   const id = req.params.id;
 
   if (!ObjectId.isValid(id)) {
@@ -44,7 +44,7 @@ const getSingle = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  //#swagger.tags = ['User']
+  //#swagger.tags = ['Users']
   const newUser = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -64,7 +64,7 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  //#swagger.tags = ['User']
+  //#swagger.tags = ['Users']
   const updatedUser = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -92,7 +92,7 @@ const updateUser = async (req, res) => {
         { _id: ObjectId.createFromHexString(id) },
         {
           $set: {
-            ...req.body,
+            ...req.body
           }
         }
       );
@@ -109,7 +109,7 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  //#swagger.tags = ['User']
+  //#swagger.tags = ['Users']
   const id = req.params.id;
 
   if (!ObjectId.isValid(id)) {
@@ -129,7 +129,7 @@ const deleteUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  //#swagger.tags = ['User']
+  //#swagger.tags = ['Users']
 
   try {
     const user = await db

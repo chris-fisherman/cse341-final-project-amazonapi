@@ -1,33 +1,19 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Twitter Api",
-    "description": "Twitter Api",
+    "title": "Amazon API",
+    "description": "This is an Amazon API to the final team project for the CSE 341 Web Services course.",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-final-project-server.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https",
-    "http"
-  ],
+  "schemes": ["https"],
   "paths": {
-    "/api-docs": {
+    "/categories/": {
       "get": {
+        "tags": ["Categories"],
         "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/category/": {
-      "get": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -41,9 +27,31 @@
         }
       },
       "post": {
+        "tags": ["Categories"],
         "description": "",
-        "produces": [
-          "application/json"
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "createdAt": {
+                  "example": "any"
+                },
+                "updateAt": {
+                  "example": "any"
+                }
+              }
+            }
+          }
         ],
         "responses": {
           "201": {
@@ -55,12 +63,11 @@
         }
       }
     },
-    "/category/{id}": {
+    "/categories/{id}": {
       "get": {
+        "tags": ["Categories"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -85,16 +92,36 @@
         }
       },
       "put": {
+        "tags": ["Categories"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "createdAt": {
+                  "example": "any"
+                },
+                "updateAt": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -111,17 +138,37 @@
             "description": "Internal Server Error"
           }
         }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/users/": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["Users"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -135,13 +182,9 @@
         }
       },
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["Users"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "body",
@@ -183,13 +226,9 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["Users"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -227,13 +266,9 @@
         }
       },
       "put": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["Users"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -301,13 +336,9 @@
         }
       },
       "delete": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["Users"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -356,13 +387,9 @@
     },
     "/users/login": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["Users"],
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "body",

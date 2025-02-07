@@ -4,12 +4,10 @@ const Category = require('../models/categories')(mongoose);
 const { ObjectId } = mongoose.Types;
 
 const getAllCategories = async (req, res) => {
+  //#swagger.tags = ['Categories']
   try {
-    const categories = await db.getDB()
-      .collection('categories')
-      .find({})
-      .toArray();
-    
+    const categories = await db.getDB().collection('categories').find({}).toArray();
+
     res.setHeader('Content-Type', 'application/json');
     if (!categories.length) {
       return res.status(404).json({ message: 'No categories found.' });
@@ -18,9 +16,10 @@ const getAllCategories = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 const getCategoryById = async (req, res) => {
+  //#swagger.tags = ['Categories']
   const id = req.params.id;
 
   if (!ObjectId.isValid(id)) {
@@ -32,7 +31,7 @@ const getCategoryById = async (req, res) => {
       .getDB()
       .collection('categories')
       .findOne({ _id: ObjectId.createFromHexString(id) });
-    
+
     res.setHeader('Content-Type', 'application/json');
     if (!category) {
       return res.status(404).json({ message: 'Category not found.' });
@@ -41,10 +40,16 @@ const getCategoryById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 const createCategory = async (req, res) => {
-  const newCategory = new Category(req.body);
+  //#swagger.tags = ['Categories']
+  const newCategory = new Category({
+    name: req.body.name,
+    description: req.body.description,
+    createdAt: req.body.createdAt,
+    updateAt: req.body.updateAt
+  });
 
   try {
     await newCategory.save();
@@ -53,10 +58,16 @@ const createCategory = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message, stack: error.stack });
   }
-}
+};
 
 const updateCategory = async (req, res) => {
-  const getUpdates = req.body;
+  //#swagger.tags = ['Categories']
+  const getUpdates = new Category({
+    name: req.body.name,
+    description: req.body.description,
+    createdAt: req.body.createdAt,
+    updateAt: req.body.updateAt
+  });
 
   if (!getUpdates) {
     return res.status(400).json({ message: 'No category data provided.' });
@@ -74,10 +85,14 @@ const updateCategory = async (req, res) => {
       .collection('categories')
       .findOneAndUpdate(
         { _id: ObjectId.createFromHexString(id) },
-        { $set: getUpdates },
+        {
+          $set: {
+            ...req.body
+          }
+        },
         {
           new: true,
-          upsert: false,
+          upsert: false
         }
       );
 
@@ -87,15 +102,35 @@ const updateCategory = async (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json({ message: 'Category updated successfully.' });
-  }
-  catch (error) {
+  } catch (error) {
     return res.status(500).json({ message: error.message, stack: error.stack });
   }
-}
+};
+
+const deleteCategory = async (req, res) => {
+  //#swagger.tags = ['Categories']
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid Category ID format.' });
+  }
+
+  try {
+    await db
+      .getDB()
+      .collection('categories')
+      .deleteOne({ _id: ObjectId.createFromHexString(id) });
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(201).json({ message: 'Category deleted successfully.' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, stack: error.stack });
+  }
+};
 
 module.exports = {
   getAllCategories,
   getCategoryById,
   createCategory,
-  updateCategory
+  updateCategory,
+  deleteCategory
 };
