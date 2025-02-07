@@ -44,7 +44,12 @@ const getCategoryById = async (req, res) => {
 
 const createCategory = async (req, res) => {
   //#swagger.tags = ['Categories']
-  const newCategory = new Category(req.body);
+  const newCategory = new Category({
+    name: req.body.name,
+    description: req.body.description,
+    createdAt: req.body.createdAt,
+    updateAt: req.body.updateAt
+  });
 
   try {
     await newCategory.save();
@@ -57,7 +62,12 @@ const createCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   //#swagger.tags = ['Categories']
-  const getUpdates = req.body;
+  const getUpdates = new Category({
+    name: req.body.name,
+    description: req.body.description,
+    createdAt: req.body.createdAt,
+    updateAt: req.body.updateAt
+  });
 
   if (!getUpdates) {
     return res.status(400).json({ message: 'No category data provided.' });
@@ -75,7 +85,11 @@ const updateCategory = async (req, res) => {
       .collection('categories')
       .findOneAndUpdate(
         { _id: ObjectId.createFromHexString(id) },
-        { $set: getUpdates },
+        {
+          $set: {
+            ...req.body
+          }
+        },
         {
           new: true,
           upsert: false
