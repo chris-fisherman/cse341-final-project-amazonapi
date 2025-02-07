@@ -107,9 +107,30 @@ const updateCategory = async (req, res) => {
   }
 };
 
+const deleteCategory = async (req, res) => {
+  //#swagger.tags = ['Categories']
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid Category ID format.' });
+  }
+
+  try {
+    await db
+      .getDB()
+      .collection('categories')
+      .deleteOne({ _id: ObjectId.createFromHexString(id) });
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(201).json({ message: 'Category deleted successfully.' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message, stack: error.stack });
+  }
+};
+
 module.exports = {
   getAllCategories,
   getCategoryById,
   createCategory,
-  updateCategory
+  updateCategory,
+  deleteCategory
 };
