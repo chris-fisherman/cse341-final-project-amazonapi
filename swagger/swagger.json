@@ -22,7 +22,7 @@
         }
       }
     },
-    "/category/": {
+    "/categories/": {
       "get": {
         "tags": [
           "Categories"
@@ -84,7 +84,7 @@
         }
       }
     },
-    "/category/{id}": {
+    "/categories/{id}": {
       "get": {
         "tags": [
           "Categories"
