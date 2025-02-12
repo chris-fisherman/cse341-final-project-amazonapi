@@ -3,15 +3,14 @@
 /*****************************/
 /* router */
 const routes = require('express').Router();
-const categories = require('./categories');
-const users = require('./users');
 
 /*****************************/
 /*** ROUTES ***/
 /*****************************/
 routes.use('/', require('./swagger'));
-routes.use('/categories', categories);
-routes.use('/users', users);
+routes.use('/categories', require('./categories'));
+routes.use('/orders', require('./orders'));
+routes.use('/users', require('./users'));
 
 /*****************************/
 /*** EXPORTS ***/
