@@ -116,6 +116,15 @@ const deleteCategory = async (req, res) => {
   }
 
   try {
+    const category = await db
+      .getDB()
+      .collection('categories')
+      .findOne({ _id: ObjectId.createFromHexString(id) });
+
+    if (!category) {
+      return res.status(404).json({ error: 'Category do not exists.' });
+    }
+    
     await db
       .getDB()
       .collection('categories')

@@ -14,6 +14,7 @@ routes.use('/', require('./swagger'));
 routes.use('/categories', categories);
 routes.use('/users', users);
 routes.use('/products', products);
+routes.use('/orders', require('./orders'));
 
 /*****************************/
 /*** EXPORTS ***/
