@@ -113,7 +113,6 @@ describe('GET /users/:id', () => {
   let response;
   beforeEach(async () => {
     response = await request(app).get('/users/67a5d5122532b5228ce9c5c0').send();
-    console.log(response.body);
   });
 
   it('if the authorization is not defined, respond with a 401 status code', async () => {
