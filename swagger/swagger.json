@@ -682,7 +682,7 @@
                   "example": "number"
                 },
                 "status": {
-                  "example": "any"
+                  "example": "pending, shipped, or delivered"
                 },
                 "shippingAddress": {
                   "example": {
