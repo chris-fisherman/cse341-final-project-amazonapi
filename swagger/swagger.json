@@ -5,9 +5,9 @@
     "description": "This is an Amazon API to the final team project for the CSE 341 Web Services course.",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-final-project-server.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "paths": {
     "/categories/": {
       "get": {
