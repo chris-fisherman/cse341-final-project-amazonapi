@@ -21,10 +21,18 @@ npm run dev
 
 ## 🟢Running swagger.js
 
-**1.** To create a new swagger.json, run the code `npm run swagger`
+To create a new swagger.json, run the code `npm run swagger`
 
 ```
 npm run swagger
+```
+
+## 🧪Testing
+
+To test all get endpoints, run this code `npm test`
+
+```
+npm test
 ```
 
 ## 📜Rules for development
@@ -52,17 +60,17 @@ npm run swagger
 
 ### Week 06 (Feb/10 - Feb/15)
 
-- [ ] **Products** collection with all CRUD operations (**Ignacio Marenco**)
-- [ ] Error handling to **Products** collection (**Ignacio Marenco**)
-- [ ] **Orders** collection with all CRUD operations (**Nestor Otondo**)
-- [ ] Error handling to **Orders** collection (**Nestor Otondo**)
-- [ ] API Swagger documentation to **Products** and **Orders** collections (**Christian Peraza**)
+- [x] **Products** collection with all CRUD operations (**Ignacio Marenco**)
+- [x] Error handling to **Products** collection (**Ignacio Marenco**)
+- [x] **Orders** collection with all CRUD operations (**Nestor Otondo**)
+- [x] Error handling to **Orders** collection (**Nestor Otondo**)
+- [x] API Swagger documentation to **Products** and **Orders** collections (**Christian Peraza**)
 - [ ] Validation to **Users** and **Products** collections on POST and PUT endpoints (**Ignacio Marenco**)
 - [ ] Validation to **Categories** and **Orders** collections on POST and PUT endpoints (**Nestor Otondo**)
-- [ ] Implement OAuth and secure at least two
+- [x] Implement OAuth and secure at least two
       collections' POST and PUT endpoints
-      behind authorization (**Christian Peraza**)
-- [ ] Write at least four unit tests your GET
+      behind authorization (**Ignacio Marenco**)
+- [x] Write at least four unit tests your GET
       endpoints in each collection (**Christian Peraza**)
 
 ### Week 07 (Feb/17 - Feb/19)
