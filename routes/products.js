@@ -7,12 +7,13 @@ const {
   deleteProduct,
   updateProduct
 } = require('../controllers/products');
+const { getProductValidation } = require('../middlewares/validation');
 
 routes
   .get('/', getAll)
-  .get('/:id', Auth.login, getSingle)
-  .post('/', createProduct)
-  .put('/:id', Auth.login, updateProduct)
+  .get('/:id', getSingle)
+  .post('/', Auth.login, getProductValidation(), createProduct)
+  .put('/:id', Auth.login, getProductValidation(), updateProduct)
   .delete('/:id', Auth.login, deleteProduct);
 
 module.exports = routes;
