@@ -17,7 +17,7 @@ orders.getAllOrders = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 orders.getOrderById = async (req, res) => {
   //#swagger.tags = ['Orders']
@@ -41,7 +41,7 @@ orders.getOrderById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 orders.createOrder = async (req, res) => {
   //#swagger.tags = ['Orders']
@@ -60,10 +60,21 @@ orders.createOrder = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message, stack: error.stack });
   }
-}
+};
 
 orders.updateOrder = async (req, res) => {
   //#swagger.tags = ['Orders']
+  const getUpdates = new Order({
+    user_id: req.body.user_id,
+    products: req.body.products,
+    totalAmount: req.body.totalAmount,
+    status: req.body.status,
+    shippingAddress: req.body.shippingAddress
+  });
+
+  if (!getUpdates) {
+    return res.status(400).json({ message: 'No Order data provided.' });
+  }
   const id = req.params.id;
 
   if (!ObjectId.isValid(id)) {
@@ -74,23 +85,29 @@ orders.updateOrder = async (req, res) => {
     const order = await db
       .getDB()
       .collection('orders')
-      .findOne({ _id: ObjectId.createFromHexString(id) });
+      .findOneAndUpdate(
+        { _id: ObjectId.createFromHexString(id) },
+        {
+          $set: {
+            ...req.body
+          }
+        },
+        {
+          new: true,
+          upsert: false
+        }
+      );
 
     if (!order) {
-      return res.status(404).json({ message: 'Order not found.' });
+      return res.status(404).json({ message: 'Order do not has been updated.' });
     }
-
-    await db
-      .getDB()
-      .collection('orders')
-      .updateOne({ _id: ObjectId.createFromHexString(id) }, { $set: { ...req.body } });
 
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json({ message: 'Order updated successfully.' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 orders.deleteOrder = async (req, res) => {
   //#swagger.tags = ['Orders']
@@ -120,6 +137,6 @@ orders.deleteOrder = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 module.exports = orders;

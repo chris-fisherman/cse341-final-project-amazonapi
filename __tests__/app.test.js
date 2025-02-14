@@ -135,3 +135,133 @@ describe('GET /users/:id', () => {
     expect(response.body).toBeInstanceOf(Object);
   });
 });
+
+/*****************************/
+/*** GET ALL PRODUCTS ***/
+/*****************************/
+describe('GET /products', () => {
+  let response;
+  beforeEach(async () => {
+    response = await request(app).get('/products').send();
+  });
+
+  it('should respond with a 200 status code', async () => {
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toContain('json');
+  });
+
+  it('if the path is wrong, it should respond with a 404 status code', async () => {
+    response = await request(app).get('/product');
+    expect(response.status).toBe(404);
+  });
+
+  it('should return an array of products', async () => {
+    expect(response.body).toBeInstanceOf(Array);
+  });
+
+  it('should have at least 1 product', async () => {
+    expect(response.body.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+/*****************************/
+/*** GET A SINGLE PRODUCT ***/
+/*****************************/
+describe('GET /products/:id', () => {
+  let response;
+  beforeEach(async () => {
+    response = await request(app).get('/products/67af3603a2133ec7f49210fd').send();
+  });
+
+  it('if the authorization is not defined, respond with a 401 status code', async () => {
+    expect(response.headers['authorization']).not.toBeDefined();
+    expect(response.status).toBe(401);
+  });
+
+  it('if the id is wrong, it should respond with a 401 status code', async () => {
+    response = await request(app).get('/products/1234567890');
+    expect(response.status).toBe(401);
+  });
+
+  it('should return a message if missing authorization', async () => {
+    expect(response.body).toMatchObject({
+      message: "Cannot read properties of null (reading 'payload')"
+    });
+  });
+
+  it('should return an object of a single product', async () => {
+    expect(response.body).toBeInstanceOf(Object);
+  });
+});
+
+/*****************************/
+/*** GET ALL ORDERS ***/
+/*****************************/
+describe('GET /orders', () => {
+  let response;
+  beforeEach(async () => {
+    response = await request(app).get('/orders').send();
+  });
+
+  it('should respond with a 200 status code', async () => {
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toContain('json');
+  });
+
+  it('if the path is wrong, it should respond with a 404 status code', async () => {
+    response = await request(app).get('/order');
+    expect(response.status).toBe(404);
+  });
+
+  it('should return an array of orders', async () => {
+    expect(response.body).toBeInstanceOf(Array);
+  });
+
+  it('should have at least 1 order', async () => {
+    expect(response.body.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+/*****************************/
+/*** GET A SINGLE ORDER ***/
+/*****************************/
+describe('GET /orders/:id', () => {
+  let response;
+  beforeEach(async () => {
+    response = await request(app).get('/orders/67af3fa49a558a1b082e12f6').send();
+  });
+
+  it('should respond with a 200 status code', async () => {
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toContain('json');
+  });
+
+  it('if the id is wrong, it should respond with a 400 status code', async () => {
+    response = await request(app).get('/orders/1234567890');
+    expect(response.status).toBe(400);
+  });
+
+  it('should have all properties defined', async () => {
+    expect(response.body._id).toBeDefined();
+    expect(response.body.user_id).toBeDefined();
+    expect(response.body.products).toBeDefined();
+    expect(response.body.products[0].product_id).toBeDefined();
+    expect(response.body.products[0].quantity).toBeDefined();
+    expect(response.body.products[0].price).toBeDefined();
+    expect(response.body.products[0]._id).toBeDefined();
+    expect(response.body.totalAmount).toBeDefined();
+    expect(response.body.status).toBeDefined();
+    expect(response.body.shippingAddress).toBeDefined();
+    expect(response.body.shippingAddress.street).toBeDefined();
+    expect(response.body.shippingAddress.city).toBeDefined();
+    expect(response.body.shippingAddress.state).toBeDefined();
+    expect(response.body.shippingAddress.country).toBeDefined();
+    expect(response.body.shippingAddress.zip).toBeDefined();
+    expect(response.body.createdAt).toBeDefined();
+    expect(response.body.updateAt).toBeDefined();
+  });
+
+  it('should return an object of a single order', async () => {
+    expect(response.body).toBeInstanceOf(Object);
+  });
+});
