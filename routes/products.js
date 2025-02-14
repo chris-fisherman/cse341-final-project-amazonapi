@@ -12,7 +12,7 @@ const { getProductValidation } = require('../middlewares/validation');
 routes
   .get('/', getAll)
   .get('/:id', getSingle)
-  .post('/', getProductValidation(), createProduct)
+  .post('/', Auth.login, getProductValidation(), createProduct)
   .put('/:id', Auth.login, getProductValidation(), updateProduct)
   .delete('/:id', Auth.login, deleteProduct);
 
