@@ -6,12 +6,13 @@ const {
   updateCategory,
   deleteCategory
 } = require('../controllers/categories');
+const { validateCategories } = require('../middlewares/validator');
 
 routes
   .get('/', getAllCategories)
   .get('/:id', getCategoryById)
-  .post('/', createCategory)
-  .put('/:id', updateCategory)
+  .post('/', validateCategories, createCategory)
+  .put('/:id', validateCategories, updateCategory)
   .delete('/:id', deleteCategory);
 
 module.exports = routes;
