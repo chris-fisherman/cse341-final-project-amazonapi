@@ -91,7 +91,7 @@ const updateProduct = async (req, res) => {
         { _id: ObjectId.createFromHexString(id) },
         {
           $set: {
-            ...updatedProduct
+            ...req.body
           }
         }
       );
