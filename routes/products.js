@@ -7,12 +7,13 @@ const {
   updateProduct
 } = require('../controllers/products');
 const { validateProducts } = require('../middlewares/validator');
+const { isAuthenticated } = require('../middlewares/authentication');
 
 routes
   .get('/', getAll)
   .get('/:id', getSingle)
-  .post('/', validateProducts, createProduct)
-  .put('/:id', validateProducts, updateProduct)
+  .post('/', isAuthenticated, validateProducts, createProduct)
+  .put('/:id', isAuthenticated, validateProducts, updateProduct)
   .delete('/:id', deleteProduct);
 
 module.exports = routes;
