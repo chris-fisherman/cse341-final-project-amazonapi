@@ -19,7 +19,7 @@ module.exports = (mongoose) => {
           type: String,
           required: true
         },
-        category: {
+        categoryId: {
           type: mongoose.Schema.Types.ObjectId,
           require: true,
           ref: 'categories'

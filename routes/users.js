@@ -8,13 +8,13 @@ const {
   updateUser,
   deleteUser
 } = require('../controllers/users');
-const { getUserValidations } = require('../middlewares/validation');
+const { validateUsers } = require('../middlewares/validator');
 
 routes
   .get('/', getAll)
   .get('/:id', Auth.login, getSingle)
-  .post('/', getUserValidations(), createUser)
-  .put('/:id', Auth.login, getUserValidations(), updateUser)
+  .post('/', validateUsers, createUser)
+  .put('/:id', validateUsers, Auth.login, updateUser)
   .delete('/:id', Auth.login, deleteUser)
   .post('/login', loginUser);
 

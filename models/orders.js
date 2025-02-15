@@ -38,28 +38,30 @@ module.exports = (mongoose) => {
           enum: ['pending', 'shipped', 'delivered'],
           default: 'pending'
         },
-        shippingAddress: {
-          street: {
-            type: String,
-            required: true
-          },
-          city: {
-            type: String,
-            required: true
-          },
-          state: {
-            type: String,
-            required: true
-          },
-          country: {
-            type: String,
-            required: true
-          },
-          zip: {
-            type: String,
-            required: true
+        shippingAddress: [
+          {
+            street: {
+              type: String,
+              required: true
+            },
+            city: {
+              type: String,
+              required: true
+            },
+            state: {
+              type: String,
+              required: true
+            },
+            country: {
+              type: String,
+              required: true
+            },
+            zip: {
+              type: String,
+              required: true
+            }
           }
-        },
+        ],
 
         updateAt: {
           type: Date,
