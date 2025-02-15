@@ -7,12 +7,13 @@ const {
   deleteCategory
 } = require('../controllers/categories');
 const { validateCategories } = require('../middlewares/validator');
+const { isAuthenticated } = require('../middlewares/authentication');
 
 routes
   .get('/', getAllCategories)
   .get('/:id', getCategoryById)
-  .post('/', validateCategories, createCategory)
-  .put('/:id', validateCategories, updateCategory)
+  .post('/', isAuthenticated, validateCategories, createCategory)
+  .put('/:id', isAuthenticated, validateCategories, updateCategory)
   .delete('/:id', deleteCategory);
 
 module.exports = routes;

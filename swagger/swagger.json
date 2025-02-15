@@ -42,12 +42,6 @@
                 },
                 "description": {
                   "example": "any"
-                },
-                "createdAt": {
-                  "example": "any"
-                },
-                "updateAt": {
-                  "example": "any"
                 }
               }
             }
@@ -115,12 +109,6 @@
                   "example": "any"
                 },
                 "description": {
-                  "example": "any"
-                },
-                "createdAt": {
-                  "example": "any"
-                },
-                "updateAt": {
                   "example": "any"
                 }
               }
