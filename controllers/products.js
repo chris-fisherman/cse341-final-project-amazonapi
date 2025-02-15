@@ -49,7 +49,7 @@ const createProduct = async (req, res) => {
     description: req.body.description,
     rating: req.body.rating,
     image: req.body.image,
-    category: req.body.category,
+    categoryId: req.body.categoryId,
     userId: req.body.userId
   });
 

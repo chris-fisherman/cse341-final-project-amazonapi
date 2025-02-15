@@ -1,0 +1,37 @@
+// CATEGORIES post & put
+    "name": {
+        "example": "any"
+    },
+    "description": {
+        "example": "any"
+    }
+
+// ORDERS post & put
+    "user_id": {
+        "example": "user_id"
+    },
+    "products": {
+        "example": [
+        {
+            "product_id": "product_id",
+            "quantity": "number",
+            "price": "number"
+        }
+        ]
+    },
+    "totalAmount": {
+        "example": "number"
+    },
+    "status": {
+        "example": "pending, shipped, or delivered"
+    },
+    "shippingAddress": {
+        "example": {
+        "street": "any",
+        "city": "any",
+        "state": "any",
+        "country": "any",
+        "zip": "any"
+        }
+    }
+
