@@ -29,7 +29,6 @@ const validateCategories = (req, res, next) => {
 /****************************/
 const validateUsers = (req, res, next) => {
   const validationRule = {
-    userId: 'required|alpha_num|min:24|max:24',
     firstName: 'required|string|min:2',
     lastName: 'required|string|min:2',
     username: 'required|string|min:5',
