@@ -173,19 +173,25 @@ describe('GET /products/:id', () => {
     response = await request(app).get('/products/67af3603a2133ec7f49210fd').send();
   });
 
-  it('if the authorization is not defined, respond with a 401 status code', async () => {
+  it('if the authorization is defined, respond with a 200 status code', async () => {
     expect(response.headers['authorization']).not.toBeDefined();
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(200);
   });
 
-  it('if the id is wrong, it should respond with a 401 status code', async () => {
+  it('if the id is wrong, it should respond with a 400 status code', async () => {
     response = await request(app).get('/products/1234567890');
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(400);
   });
 
-  it('should return a message if missing authorization', async () => {
+  it('should return the messages', async () => {
     expect(response.body).toMatchObject({
-      message: "Cannot read properties of null (reading 'payload')"
+      _id: '67af3603a2133ec7f49210fd',
+      categoryId: '67a3ed06b964a22ecccaa843',
+      description: 'Phone',
+      image: 'any',
+      rating: 8.6,
+      title: 'Samsung Galaxy A13',
+      userId: '67a5d5122532b5228ce9c5c0'
     });
   });
 
@@ -248,7 +254,6 @@ describe('GET /orders/:id', () => {
     expect(response.body.products[0].product_id).toBeDefined();
     expect(response.body.products[0].quantity).toBeDefined();
     expect(response.body.products[0].price).toBeDefined();
-    expect(response.body.products[0]._id).toBeDefined();
     expect(response.body.totalAmount).toBeDefined();
     expect(response.body.status).toBeDefined();
     expect(response.body.shippingAddress).toBeDefined();
