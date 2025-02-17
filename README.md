@@ -65,8 +65,8 @@ npm test
 - [x] **Orders** collection with all CRUD operations (**Nestor Otondo**)
 - [x] Error handling to **Orders** collection (**Nestor Otondo**)
 - [x] API Swagger documentation to **Products** and **Orders** collections (**Christian Peraza**)
-- [ ] Validation to **Users** and **Products** collections on POST and PUT endpoints (**Ignacio Marenco**)
-- [ ] Validation to **Categories** and **Orders** collections on POST and PUT endpoints (**Nestor Otondo**)
+- [x] Validation to **Users** and **Products** collections on POST and PUT endpoints (**Ignacio Marenco**)
+- [x] Validation to **Categories** and **Orders** collections on POST and PUT endpoints (**Nestor Otondo**)
 - [x] Implement OAuth and secure at least two
       collections' POST and PUT endpoints
       behind authorization (**Ignacio Marenco**)
